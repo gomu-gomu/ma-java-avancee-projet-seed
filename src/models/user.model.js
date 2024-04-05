@@ -3,7 +3,7 @@ import { db } from './../lib/db.lib.js';
 
 
 
-export const User = db.define('users', {
+const User = db.define('users', {
   id: {
     primaryKey: true,
     allowNull: false,
@@ -31,3 +31,6 @@ export const User = db.define('users', {
     type: DataTypes.SMALLINT
   }
 });
+
+await User.sync();
+export { User };

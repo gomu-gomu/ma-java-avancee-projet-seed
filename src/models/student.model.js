@@ -4,7 +4,7 @@ import { User } from './user.model.js';
 
 
 
-export const Student = db.define('students', {
+const Student = db.define('students', {
   id: {
     primaryKey: true,
     allowNull: false,
@@ -30,5 +30,8 @@ export const Student = db.define('students', {
   }
 });
 
+await Student.sync();
 User.hasOne(Student, { foreignKey: 'userId' });
 Student.belongsTo(User, { foreignKey: 'userId' });
+
+export { Student };

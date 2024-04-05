@@ -14,10 +14,6 @@ import { createUser } from '../seeders/user.seeder.js';
 const MAX_PARENTS = 25;
 
 export async function seedParents() {
-  await User.sync();
-  await Student.sync();
-  await Parenthood.sync();
-
   for (let _ of new Array(MAX_PARENTS).fill(0)) {
     const parentUser = createUser(UserType.Parent);
     await User.create(parentUser);

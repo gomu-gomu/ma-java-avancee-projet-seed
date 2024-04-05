@@ -5,7 +5,7 @@ import { Student } from './student.model.js';
 
 
 
-export const Parenthood = db.define('parenthood', {
+const Parenthood = db.define('parenthood', {
   id: {
     primaryKey: true,
     allowNull: false,
@@ -31,7 +31,10 @@ export const Parenthood = db.define('parenthood', {
   }
 });
 
+await Parenthood.sync();
 User.hasMany(Parenthood, { foreignKey: 'parentId' });
 Parenthood.belongsTo(User, { foreignKey: 'parentId' });
 Student.hasMany(Parenthood, { foreignKey: 'studentId' });
 Parenthood.belongsTo(Student, { foreignKey: 'studentId' });
+
+export { Parenthood };
