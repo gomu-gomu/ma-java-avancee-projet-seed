@@ -30,7 +30,8 @@ const Student = db.define('students', {
   }
 });
 
-await Student.sync();
+await Student.sync({ force: true });
+
 User.hasOne(Student, { foreignKey: 'userId' });
 Student.belongsTo(User, { foreignKey: 'userId' });
 

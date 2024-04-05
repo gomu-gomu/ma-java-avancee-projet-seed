@@ -32,5 +32,5 @@ const User = db.define('users', {
   }
 });
 
-await User.sync();
+await User.sync({ force: true });
 export { User };

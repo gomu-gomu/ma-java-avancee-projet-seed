@@ -31,7 +31,8 @@ const Parenthood = db.define('parenthood', {
   }
 });
 
-await Parenthood.sync();
+await Parenthood.sync({ force: true });
+
 User.hasMany(Parenthood, { foreignKey: 'parentId' });
 Parenthood.belongsTo(User, { foreignKey: 'parentId' });
 Student.hasMany(Parenthood, { foreignKey: 'studentId' });
