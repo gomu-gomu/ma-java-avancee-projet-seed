@@ -1,12 +1,22 @@
 {
-  "name": "ma-java-avancee-projet-seed",
+  "type": "module",
+  "license": "MIT",
   "version": "0.0.1",
-  "description": "Data seeding for student management web app.",
+  "author": "eoussama",
   "main": "src/index.js",
+  "name": "ma-java-avancee-projet-seed",
+  "keywords": [
+    "master",
+    "java-avancee"
+  ],
+  "description": "Data seeding for student management web app.",
   "scripts": {
     "start": "node src/index.js"
   },
-  "keywords": [],
-  "author": "eoussama",
-  "license": "MIT"
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "dotenv": "^16.4.5",
+    "pg": "^8.11.5",
+    "sequelize": "^6.37.2"
+  }
 }
