@@ -1,0 +1,12 @@
+{
+  "name": "ma-java-avancee-projet-seed",
+  "version": "0.0.1",
+  "description": "Data seeding for student management web app.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "eoussama",
+  "license": "MIT"
+}
