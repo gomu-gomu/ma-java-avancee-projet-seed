@@ -29,7 +29,7 @@ const Parenthood = db.define('parenthood', {
       key: 'id',
     }
   }
-});
+}, { tableName: 'parenthood' });
 
 await Parenthood.sync({ force: true });
 
