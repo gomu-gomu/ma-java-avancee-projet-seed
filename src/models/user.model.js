@@ -3,7 +3,7 @@ import { db } from './../lib/db.lib.js';
 
 
 
-const User = db.define('users', {
+const User = db.define('user', {
   id: {
     primaryKey: true,
     allowNull: false,
@@ -18,16 +18,8 @@ const User = db.define('users', {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  phone: {
-    type: DataTypes.STRING,
-  },
-  firstName: {
-    type: DataTypes.STRING,
-  },
-  lastName: {
-    type: DataTypes.STRING,
-  },
   type: {
+    allowNull: false,
     type: DataTypes.SMALLINT
   }
 });

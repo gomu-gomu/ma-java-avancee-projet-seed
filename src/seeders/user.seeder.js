@@ -12,10 +12,7 @@ export function createUser(type) {
   return {
     type,
     id: faker.string.uuid(),
-    phone: faker.phone.number(),
     email: faker.internet.email(),
-    lastName: faker.person.lastName(),
-    firstName: faker.person.firstName(),
-    password: faker.internet.password(),
+    password: faker.internet.password()
   };
 }

@@ -4,7 +4,7 @@ import { User } from './user.model.js';
 
 
 
-const Student = db.define('students', {
+const Student = db.define('student', {
   id: {
     primaryKey: true,
     allowNull: false,
@@ -26,6 +26,17 @@ const Student = db.define('students', {
   },
   cin: {
     unique: true,
+    type: DataTypes.STRING,
+  },
+  firstName: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  lastName: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  phone: {
     type: DataTypes.STRING,
   }
 });

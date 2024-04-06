@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../lib/db.lib.js';
-import { User } from './user.model.js';
+import { Parent } from './parent.model.js';
 import { Student } from './student.model.js';
 
 
@@ -16,7 +16,7 @@ const Parenthood = db.define('parenthood', {
     allowNull: false,
     type: DataTypes.UUID,
     references: {
-      model: User,
+      model: Parent,
       key: 'id',
     }
   },
@@ -29,12 +29,12 @@ const Parenthood = db.define('parenthood', {
       key: 'id',
     }
   }
-}, { tableName: 'parenthood' });
+});
 
 await Parenthood.sync({ force: true });
 
-User.hasMany(Parenthood, { foreignKey: 'parentId' });
-Parenthood.belongsTo(User, { foreignKey: 'parentId' });
+Parent.hasMany(Parenthood, { foreignKey: 'parentId' });
+Parenthood.belongsTo(Parent, { foreignKey: 'parentId' });
 Student.hasMany(Parenthood, { foreignKey: 'studentId' });
 Parenthood.belongsTo(Student, { foreignKey: 'studentId' });
 
