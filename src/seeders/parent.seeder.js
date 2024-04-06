@@ -39,7 +39,7 @@ export async function seedParents() {
  *
  * @param {String} userId The parent's user UUID
  */
-export function createParent(userId) {
+function createParent(userId) {
   return {
     userId,
     id: faker.string.uuid(),

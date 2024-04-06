@@ -1,13 +1,15 @@
 import { seedAdmins } from './seeders/admin.seeder.js';
+import { seedClasses } from './seeders/class.seeder.js';
 import { seedParents } from './seeders/parent.seeder.js';
 
 
 
-function main() {
+async function main() {
   console.info('Seeding Student Management database...');
 
-  seedAdmins();
-  seedParents();
+  await seedAdmins();
+  await seedParents();
+  await seedClasses();
 
   console.info('Databased seeded!');
 }
