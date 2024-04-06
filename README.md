@@ -1,4 +1,4 @@
-# Student Management Data Seed
+# Student Management Data Seeder
 
 This is a script that seeds data for the Student Management web app.
 

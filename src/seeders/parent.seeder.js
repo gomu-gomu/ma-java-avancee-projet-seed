@@ -60,7 +60,6 @@ function createParent(userId) {
 function createParenthood(parentId, studentId) {
   return {
     parentId,
-    studentId,
-    id: faker.string.uuid()
+    studentId
   };
 }

@@ -6,25 +6,22 @@ import { Student } from './student.model.js';
 
 
 const Parenthood = db.define('parenthood', {
-  id: {
+  parentId: {
     primaryKey: true,
     allowNull: false,
     type: DataTypes.UUID,
-  },
-  parentId: {
-    allowNull: false,
-    type: DataTypes.UUID,
     references: {
-      model: Parent,
       key: 'id',
+      model: Parent
     }
   },
   studentId: {
+    primaryKey: true,
     allowNull: false,
     type: DataTypes.UUID,
     references: {
-      model: Student,
       key: 'id',
+      model: Student
     }
   }
 });
