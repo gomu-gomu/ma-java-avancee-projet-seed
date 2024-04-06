@@ -1,6 +1,7 @@
 import { seedAdmins } from './seeders/admin.seeder.js';
 import { seedClasses } from './seeders/class.seeder.js';
 import { seedParents } from './seeders/parent.seeder.js';
+import { seedSubjects } from './seeders/subject.seeder.js';
 
 
 
@@ -10,6 +11,7 @@ async function main() {
   await seedAdmins();
   await seedParents();
   await seedClasses();
+  await seedSubjects();
 
   console.info('Databased seeded!');
 }

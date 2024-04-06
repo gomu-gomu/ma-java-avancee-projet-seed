@@ -35,7 +35,7 @@ async function seedLevel(level, count) {
 
 /**
  * @description
- * Creates a fake class
+ * Seeds a fake class
  *
  * @param {String} name The name of the class
  * @param {Number} level The schooling level of the class
