@@ -12,7 +12,6 @@ const Parenthood = db.define('parenthood', {
     type: DataTypes.UUID,
   },
   parentId: {
-    unique: true,
     allowNull: false,
     type: DataTypes.UUID,
     references: {
@@ -21,7 +20,6 @@ const Parenthood = db.define('parenthood', {
     }
   },
   studentId: {
-    unique: true,
     allowNull: false,
     type: DataTypes.UUID,
     references: {
