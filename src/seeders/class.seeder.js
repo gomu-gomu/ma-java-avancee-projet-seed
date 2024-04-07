@@ -79,9 +79,9 @@ function createClass(gradeId, name) {
  */
 function getLevelCount(level) {
   switch (level) {
-    case 7: return 8;
-    case 8: return 6;
-    case 9: return 5;
+    case 7: return 3;
+    case 8: return 3;
+    case 9: return 2;
     case 11:
     case 12: return 1;
     default: return 2;

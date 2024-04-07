@@ -4,6 +4,7 @@ import { createUser } from './user.seeder.js';
 import { User } from './../models/user.model.js';
 import { Teacher } from './../models/teacher.model.js';
 import { UserType } from './../enums/user-type.enum.js';
+import { TeacherCycle } from './../models/teacherCycles.model.js';
 
 
 
@@ -12,19 +13,24 @@ import { UserType } from './../enums/user-type.enum.js';
  * Seeds fake teachers
  *
  * @param {Object} subjects The subjects to be associated with the teachers
+ * @param {Array<Object>} cycles The cycles to be associated with the teachers
  */
-export async function seedTeachers(subjects) {
+export async function seedTeachers(subjects, cycles) {
+  const teachers = [];
+
   for (const subject of Object.values(subjects)) {
-    const teacherCount = faker.number.int(2) + 1;
-    const range = new Array(teacherCount).fill(0);
+    const teacherUser = createUser(UserType.Teacher);
+    await User.create(teacherUser);
 
-    for (const _ of range) {
-      const teacherUser = createUser(UserType.Teacher);
+    const teacher = await seedTeacher(teacherUser.id, subject.id);
+    teachers.push(teacher);
 
-      await User.create(teacherUser);
-      await seedTeacher(teacherUser.id, subject.id);
+    for (const cycle of cycles) {
+      await seedTeacherCycle(teacher.id, cycle.id);
     }
   }
+
+  return teachers;
 }
 
 /**
@@ -37,6 +43,20 @@ export async function seedTeachers(subjects) {
 async function seedTeacher(userId, subjectId) {
   const createdTeacher = createTeacher(userId, subjectId);
   await Teacher.create(createdTeacher);
+
+  return createdTeacher;
+}
+
+/**
+ * @description
+ * Seeds a fake teacher cycle association
+ *
+ * @param {String} teacherId The teacher's UUID
+ * @param {String} cycleId The cycle's UUID associated with the teacher
+ */
+async function seedTeacherCycle(teacherId, cycleId) {
+  const createdTeacherCycle = createTeacherCycle(teacherId, cycleId);
+  await TeacherCycle.create(createdTeacherCycle);
 }
 
 /**
@@ -55,5 +75,19 @@ function createTeacher(userId, subjectId) {
     firstName: faker.person.firstName(),
     phone: faker.phone.number('06 ## ## ## ##'),
     cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${100000 + faker.number.int(100000)}`
+  };
+}
+
+/**
+ * @description
+ * Creates a fake teacher cycle association
+ *
+ * @param {String} teacherId The teacher's UUID
+ * @param {String} cycleId The cycle's UUID associated with the teacher
+ */
+function createTeacherCycle(teacherId, cycleId) {
+  return {
+    cycleId,
+    teacherId
   };
 }

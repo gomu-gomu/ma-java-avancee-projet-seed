@@ -13,16 +13,20 @@ const START_YEAR = 2020;
  * @param {Object} classes The classes to be associated with the cycles
  */
 export async function seedCycles(classes) {
-  let year = START_YEAR;
+  const cycles = [];
   const endYear = START_YEAR + MAX_YEARS;
 
+  let year = START_YEAR;
   while (year < endYear) {
     for (const _class of Object.values(classes)) {
       const cycle = await seedCycle(_class.id, year);
+      cycles.push(cycle);
     }
 
     ++year;
   }
+
+  return cycles;
 }
 
 /**
@@ -35,6 +39,8 @@ export async function seedCycles(classes) {
 async function seedCycle(classId, year) {
   const createdCycle = createCycle(classId, year);
   await Cycle.create(createdCycle);
+
+  return createdCycle;
 }
 
 /**

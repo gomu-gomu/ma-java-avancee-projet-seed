@@ -11,8 +11,14 @@ const MAX_ADMINS = 4;
  * Seeds fake admin accounts
  */
 export async function seedAdmins() {
+  const admins = [];
+
   for (let _ of new Array(MAX_ADMINS).fill(0)) {
     const adminUser = createUser(UserType.Admin);
     await User.create(adminUser);
+
+    admins.push(adminUser);
   }
+
+  return admins;
 }
