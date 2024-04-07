@@ -1,4 +1,6 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
+
+
 
 /**
  * @description

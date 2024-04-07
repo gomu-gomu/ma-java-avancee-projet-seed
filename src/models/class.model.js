@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../lib/db.lib.js';
+import { Grade } from './grade.model.js';
 
 
 
@@ -13,11 +14,19 @@ const Class = db.define('class', {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  level: {
+  gradeId: {
     allowNull: false,
-    type: DataTypes.SMALLINT
+    type: DataTypes.UUID,
+    references: {
+      key: 'id',
+      model: Grade
+    }
   }
 });
 
 await Class.sync({ force: true });
+
+Grade.hasMany(Class, { foreignKey: 'gradeId' });
+Class.belongsTo(Grade, { foreignKey: 'gradeId' });
+
 export { Class };
