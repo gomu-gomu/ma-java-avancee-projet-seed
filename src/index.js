@@ -3,6 +3,7 @@ import { seedGrades } from './seeders/grade.seeder.js';
 import { seedParents } from './seeders/parent.seeder.js';
 import { seedSectors } from './seeders/sector.seeder.js';
 import { seedSubjects } from './seeders/subject.seeder.js';
+import { seedTeachers } from './seeders/teacher.seeder.js';
 
 
 
@@ -11,10 +12,11 @@ async function main() {
 
   const sectors = await seedSectors();
   const grades = await seedGrades(sectors);
-  await seedSubjects(grades);
+  const subjects = await seedSubjects(grades);
 
   await seedAdmins();
   await seedParents();
+  await seedTeachers(subjects);
 
   console.info('Databased seeded!');
 }
