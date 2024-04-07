@@ -1,63 +1,38 @@
 import { faker } from '@faker-js/faker';
-import { seedGrade } from './grade.seeder.js';
 import { Sector } from '../models/sector.model.js';
-import { seedSubjects } from './subject.seeder.js';
 
 
 
 export async function seedSectors() {
-  let sector;
+  const sectors = {};
 
   // Common
-  sector = await seedSector('Générale');
-  await seedGrade(sector.id, '1ère Année Collège', 7);
-  await seedGrade(sector.id, '2ème Année Collège', 8);
-  await seedGrade(sector.id, '3ème Année Collège', 9);
+  sectors.generateSector = await seedSector('Générale');
 
   // Tronc Commun
-  sector = await seedSector('Sciences');
-  await seedGrade(sector.id, 'Tronc Commun', 10);
-  sector = await seedSector('Technologies');
-  await seedGrade(sector.id, 'Tronc Commun', 10);
-  sector = await seedSector('Lettres et Sciences Humaines') // 1ére Bac
-  await seedGrade(sector.id, 'Tronc Commun', 10);
-  await seedGrade(sector.id, '1ère Bac', 11);
+  sectors.scienceSector = await seedSector('Sciences');
+  sectors.technologySector = await seedSector('Technologies');
+  sectors.letterAndHumanitarySector = await seedSector('Lettres et Sciences Humaines');
 
   // 1ére Bac
-  sector = await seedSector('Sciences Mathématiques');
-  await seedGrade(sector.id, '1ère Bac', 11);
-  sector = await seedSector('Sciences Expérimentales');
-  await seedGrade(sector.id, '1ère Bac', 11);
-  sector = await seedSector('Sciences Économiques et Gestion');
-  await seedGrade(sector.id, '1ère Bac', 11);
-  sector = await seedSector('Sciences et Technologies Mécaniques');
-  await seedGrade(sector.id, '1ère Bac', 11);
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences et Technologies Électriques');
-  await seedGrade(sector.id, '1ère Bac', 11);
-  await seedGrade(sector.id, '2ème Bac', 12);
+  sectors.mathsector = await seedSector('Sciences Mathématiques');
+  sectors.experimentalSector = await seedSector('Sciences Expérimentales');
+  sectors.economicalGestionSector = await seedSector('Sciences Économiques et Gestion');
+  sectors.electricTechnologySector = await seedSector('Sciences et Technologies Électriques');
+  sectors.mechanicalTechnologySector = await seedSector('Sciences et Technologies Mécaniques');
 
   // 2ére Bac
-  sector = await seedSector('Lettres');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences Humaines');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences Physiques');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences Économiques');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences Agronomiques');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences Mathématiques A');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences Mathématiques B');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences de Gestion Comptable (SGC)');
-  await seedGrade(sector.id, '2ème Bac', 12);
-  sector = await seedSector('Sciences de la Vie et de la Terre (SVT)');
-  await seedGrade(sector.id, '2ème Bac', 12);
+  sectors.lettersSector = await seedSector('Lettres');
+  sectors.physicsSector = await seedSector('Sciences Physiques');
+  sectors.humanitarySector = await seedSector('Sciences Humaines');
+  sectors.mathASector = await seedSector('Sciences Mathématiques A');
+  sectors.mathBSector = await seedSector('Sciences Mathématiques B');
+  sectors.economicalSector = await seedSector('Sciences Économiques');
+  sectors.agronomicalSector = await seedSector('Sciences Agronomiques');
+  sectors.sgcSector = await seedSector('Sciences de Gestion Comptable (SGC)');
+  sectors.svtSector = await seedSector('Sciences de la Vie et de la Terre (SVT)');
 
-  await seedSubjects(); // TODO: linkup subjects with grades
+  return sectors;
 }
 
 /**
