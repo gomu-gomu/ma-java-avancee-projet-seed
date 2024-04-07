@@ -1,5 +1,6 @@
 import { seedAdmins } from './seeders/admin.seeder.js';
 import { seedClasses } from './seeders/class.seeder.js';
+import { seedCycles } from './seeders/cycle.seeder.js';
 import { seedGrades } from './seeders/grade.seeder.js';
 import { seedParents } from './seeders/parent.seeder.js';
 import { seedSectors } from './seeders/sector.seeder.js';
@@ -14,7 +15,8 @@ async function main() {
   const sectors = await seedSectors();
   const grades = await seedGrades(sectors);
   const subjects = await seedSubjects(grades);
-  await seedClasses(grades);
+  const classes = await seedClasses(grades);
+  await seedCycles(classes);
 
   await seedAdmins();
   await seedParents();

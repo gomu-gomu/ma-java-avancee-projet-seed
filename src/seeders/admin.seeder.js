@@ -6,6 +6,10 @@ import { createUser } from '../seeders/user.seeder.js';
 
 const MAX_ADMINS = 4;
 
+/**
+ * @description
+ * Seeds fake admin accounts
+ */
 export async function seedAdmins() {
   for (let _ of new Array(MAX_ADMINS).fill(0)) {
     const adminUser = createUser(UserType.Admin);

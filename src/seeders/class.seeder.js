@@ -10,9 +10,14 @@ import { Class } from '../models/class.model.js';
  * @param {Object} grades The grades to seed the classes for
  */
 export async function seedClasses(grades) {
+  const classes = [];
+
   for (const grade of Object.values(grades)) {
-    await seedLevel(grade.id, getLevelCount(grade.level));
+    const _classes = await seedLevel(grade.id, getLevelCount(grade.level));
+    classes.push(..._classes);
   }
+
+  return classes;
 }
 
 /**
@@ -24,12 +29,17 @@ export async function seedClasses(grades) {
  */
 async function seedLevel(gradeId, count) {
   const start = 65;
+  const classes = [];
   const range = new Array(count).fill(start);
 
   for (let i = 0; i < range.length; ++i) {
     const char = String.fromCharCode(start + i);
-    await seedClass(gradeId, `Class ${char}`);
+    const _class = await seedClass(gradeId, `Class ${char}`);
+
+    classes.push(_class);
   }
+
+  return classes;
 }
 
 /**
@@ -42,6 +52,8 @@ async function seedLevel(gradeId, count) {
 async function seedClass(gradeId, name) {
   const createdClass = createClass(gradeId, name);
   await Class.create(createdClass);
+
+  return createdClass;
 }
 
 /**

@@ -32,7 +32,7 @@ export async function seedTeachers(subjects) {
  * Seeds a fake teacher
  *
  * @param {String} userId The teacher's user UUID
- * @param {String} userId The subject's UUID associated with the teacher
+ * @param {String} subjectId The subject's UUID associated with the teacher
  */
 async function seedTeacher(userId, subjectId) {
   const createdTeacher = createTeacher(userId, subjectId);
@@ -44,7 +44,7 @@ async function seedTeacher(userId, subjectId) {
  * Creates a fake teacher
  *
  * @param {String} userId The teacher's user UUID
- * @param {String} userId The subject's UUID associated with the teacher
+ * @param {String} subjectId The subject's UUID associated with the teacher
  */
 function createTeacher(userId, subjectId) {
   return {
