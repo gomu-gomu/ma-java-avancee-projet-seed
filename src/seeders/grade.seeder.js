@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker';
-import { seedLevel } from './class.seeder.js';
 import { Grade } from '../models/grade.model.js';
 
 
@@ -57,9 +56,7 @@ export async function seedGrades(sectors) {
  */
 async function seedGrade(sectorId, name, level) {
   const createdGrade = createGrade(sectorId, name, level);
-
   await Grade.create(createdGrade);
-  await seedLevel(createdGrade.id, getLevelCount(createdGrade.level));
 
   return createdGrade;
 }
@@ -79,19 +76,4 @@ function createGrade(sectorId, name, level) {
     sectorId,
     id: faker.string.uuid()
   };
-}
-
-/**
- * @description
- * Returns the apprepriate number of classes to generate for a given grade
- *
- * @param {Number} level The level of the grade
- */
-function getLevelCount(level) {
-  switch (level) {
-    case 7: return 8;
-    case 8: return 6;
-    case 9: return 5;
-    default: return 2;
-  }
 }

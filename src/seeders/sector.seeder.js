@@ -3,6 +3,10 @@ import { Sector } from '../models/sector.model.js';
 
 
 
+/**
+ * @description
+ * Seeds fake sectors
+ */
 export async function seedSectors() {
   const sectors = {};
 

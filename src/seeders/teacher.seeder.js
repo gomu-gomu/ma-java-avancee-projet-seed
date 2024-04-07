@@ -14,7 +14,7 @@ import { UserType } from './../enums/user-type.enum.js';
  * @param {Object} subjects The subjects to be associated with the teachers
  */
 export async function seedTeachers(subjects) {
-  for (const [_, subject] of Object.entries(subjects)) {
+  for (const subject of Object.values(subjects)) {
     const teacherCount = faker.number.int(2) + 1;
     const range = new Array(teacherCount).fill(0);
 

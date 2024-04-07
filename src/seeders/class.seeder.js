@@ -5,12 +5,24 @@ import { Class } from '../models/class.model.js';
 
 /**
  * @description
+ * Seeds fake classes
+ *
+ * @param {Object} grades The grades to seed the classes for
+ */
+export async function seedClasses(grades) {
+  for (const grade of Object.values(grades)) {
+    await seedLevel(grade.id, getLevelCount(grade.level));
+  }
+}
+
+/**
+ * @description
  * Seeds a collection of classes for a grade
  *
  * @param {String} gradeId The UUID of the grade that the class belongs to
  * @param {Number} count The number of classes to seed
  */
-export async function seedLevel(gradeId, count) {
+async function seedLevel(gradeId, count) {
   const start = 65;
   const range = new Array(count).fill(start);
 
@@ -45,4 +57,21 @@ function createClass(gradeId, name) {
     gradeId,
     id: faker.string.uuid()
   };
+}
+
+/**
+ * @description
+ * Returns the apprepriate number of classes to generate for a given grade
+ *
+ * @param {Number} level The level of the grade
+ */
+function getLevelCount(level) {
+  switch (level) {
+    case 7: return 8;
+    case 8: return 6;
+    case 9: return 5;
+    case 11:
+    case 12: return 1;
+    default: return 2;
+  }
 }
