@@ -4,24 +4,16 @@ import { seedLevel } from './class.seeder.js';
 
 
 
-export async function seedGrades() {
-  await seedGrade('1ère Année Collège', 7);
-  await seedGrade('2ème Année Collège', 8);
-  await seedGrade('3ème Année Collège', 9);
-  await seedGrade('Tronc Commun', 10);
-  await seedGrade('1ère Bac', 11);
-  await seedGrade('2ème Bac', 12);
-}
-
 /**
  * @description
  * Seeds a fake grade
  *
+ * @param {String} sectorId The UUID of the sector that the grade belongs to
  * @param {String} name The name of the grade
  * @param {Number} level The level of the grade
  */
-async function seedGrade(name, level) {
-  const createdGrade = createGrade(name, level);
+export async function seedGrade(sectorId, name, level) {
+  const createdGrade = createGrade(sectorId, name, level);
 
   await Grade.create(createdGrade);
   await seedLevel(createdGrade.id, getLevelCount(createdGrade.level));
@@ -31,13 +23,15 @@ async function seedGrade(name, level) {
  * @description
  * Creates a fake grade
  *
+ * @param {String} sectorId The UUID of the sector that the grade belongs to
  * @param {String} name The name of the grade
  * @param {Number} level The level of the grade
  */
-function createGrade(name, level) {
+function createGrade(sectorId, name, level) {
   return {
     name,
     level,
+    sectorId,
     id: faker.string.uuid()
   };
 }
@@ -53,6 +47,6 @@ function getLevelCount(level) {
     case 7: return 8;
     case 8: return 6;
     case 9: return 5;
-    default: return 4;
+    default: return 2;
   }
 }

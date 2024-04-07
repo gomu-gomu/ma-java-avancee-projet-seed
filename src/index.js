@@ -1,5 +1,4 @@
 import { seedAdmins } from './seeders/admin.seeder.js';
-import { seedGrades } from './seeders/grade.seeder.js';
 import { seedParents } from './seeders/parent.seeder.js';
 import { seedSectors } from './seeders/sector.seeder.js';
 
@@ -8,7 +7,6 @@ import { seedSectors } from './seeders/sector.seeder.js';
 async function main() {
   console.info('Seeding Student Management database...');
 
-  await seedGrades();
   await seedSectors();
 
   await seedAdmins();
