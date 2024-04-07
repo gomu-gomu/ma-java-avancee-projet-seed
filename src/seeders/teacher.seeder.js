@@ -72,7 +72,7 @@ function createTeacher(userId, subjectId) {
     lastName: faker.person.lastName(),
     firstName: faker.person.firstName(),
     phone: faker.phone.number('06 ## ## ## ##'),
-    cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${100000 + faker.number.int(100000)}`
+    cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${1000000 + faker.number.int(1000000)}`
   };
 }
 

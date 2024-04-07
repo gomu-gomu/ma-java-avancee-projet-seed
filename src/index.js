@@ -11,7 +11,7 @@ import { seedTeachers } from './seeders/teacher.seeder.js';
 
 
 async function main() {
-  console.info('Seeding Student Management database...');
+  console.info('\n🔃 Seeding Database...\n');
 
   const sectors = await seedSectors();
   const grades = await seedGrades(sectors);
@@ -24,7 +24,7 @@ async function main() {
   const teachers = await seedTeachers(subjects, cycles);
   const parents = await seedParents(students);
 
-  console.info('Databased seeded!');
+  console.info('\n✅ Databased seeded!\n');
 
   console.table({
     cycles: cycles.length,

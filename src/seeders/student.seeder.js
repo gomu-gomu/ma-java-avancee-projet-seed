@@ -5,6 +5,8 @@ import { Student } from '../models/student.model.js';
 import { UserType } from '../enums/user-type.enum.js';
 
 
+const MIN_STUDENT_PER_CLASS = 10;
+const MAX_STUDENT_PER_CLASS = 15;
 
 /**
  * Seeds fake students
@@ -14,11 +16,17 @@ import { UserType } from '../enums/user-type.enum.js';
 export async function seedStudents(cycles) {
   const students = [];
 
-  for (const cycle of cycles) {
-    const studentUser = await seedUser(UserType.Student);
-    const student = await seedStudent(studentUser.id);
+  for (const _ of cycles) {
+    const gen = { min: MIN_STUDENT_PER_CLASS, max: MAX_STUDENT_PER_CLASS };
+    const studentsPerClass = faker.number.int(gen);
+    const range = new Array(studentsPerClass).fill(0);
 
-    students.push(student);
+    for (const _ of range) {
+      const studentUser = await seedUser(UserType.Student);
+      const student = await seedStudent(studentUser.id);
+
+      students.push(student);
+    }
   }
 
   return students;
@@ -51,6 +59,6 @@ export function createStudent(userId) {
     firstName: faker.person.firstName(),
     phone: faker.phone.number('06 ## ## ## ##'),
     cne: `${faker.string.alpha(1).toUpperCase()}${100000000 + faker.number.int(100000000)}`,
-    cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${100000 + faker.number.int(100000)}`
+    cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${1000000 + faker.number.int(1000000)}`
   };
 }
