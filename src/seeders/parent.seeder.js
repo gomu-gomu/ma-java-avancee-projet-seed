@@ -1,36 +1,55 @@
 import { faker } from '@faker-js/faker/locale/ar';
-
+import { Parent } from '../models/parent.model.js';
+import { seedUser } from '../seeders/user.seeder.js';
 import { UserType } from '../enums/user-type.enum.js';
-
-import { User } from '../models/user.model.js';
-import { Student } from '../models/student.model.js';
 import { Parenthood } from '../models/parenthood.model.js';
 
-import { Parent } from '../models/parent.model.js';
-import { createStudent } from './student.seeder.js';
-import { createUser } from '../seeders/user.seeder.js';
 
 
+/**
+ * Seeds fake parents
+ *
+ * @param {Array<Object>} students The students to associate with the parents
+ */
+export async function seedParents(students) {
+  const parents = [];
 
-const MAX_PARENTS = 25;
+  for (const student of students) {
+    const parentUser = await seedUser(UserType.Parent);
+    const parent = await seedParent(parentUser.id);
 
-export async function seedParents() {
-  for (let _ of new Array(MAX_PARENTS).fill(0)) {
-    const parentUser = createUser(UserType.Parent);
-    await User.create(parentUser);
-    
-    const parent = createParent(parentUser.id);
-    await Parent.create(parent);
-
-    const studentUser = createUser(UserType.Student);
-    await User.create(studentUser);
-
-    const student = createStudent(studentUser.id);
-    await Student.create(student);
-
-    const parenthood = createParenthood(parent.id, student.id);
-    await Parenthood.create(parenthood);
+    await seedParenthood(parent.id, student.id);
+    parents.push(parent);
   }
+
+  return parents;
+}
+
+/**
+ * @description
+ * Seeds a fake parent
+ *
+ * @param {String} userId The parent's user UUID
+ */
+async function seedParent(userId) {
+  const createdParent = createParent(userId);
+  await Parent.create(createdParent);
+
+  return createdParent;
+}
+
+/**
+ * @description
+ * Seeds a fake parenthood
+ *
+ * @param {String} parentId The parent's UUID
+ * @param {String} studentId The student's UUID
+ */
+async function seedParenthood(parentId, studentId) {
+  const createdParenthood = createParenthood(parentId, studentId);
+  await Parenthood.create(createdParenthood);
+
+  return createdParenthood;
 }
 
 /**

@@ -1,6 +1,41 @@
 import { faker } from '@faker-js/faker/locale/ar';
 
+import { seedUser } from './user.seeder.js';
+import { Student } from '../models/student.model.js';
+import { UserType } from '../enums/user-type.enum.js';
 
+
+
+/**
+ * Seeds fake students
+ *
+ * @param {Array<Object>} cycles The cycle's to be associated with the fake students
+ */
+export async function seedStudents(cycles) {
+  const students = [];
+
+  for (const cycle of cycles) {
+    const studentUser = await seedUser(UserType.Student);
+    const student = await seedStudent(studentUser.id);
+
+    students.push(student);
+  }
+
+  return students;
+}
+
+/**
+ * @description
+ * Seeds a fake student
+ *
+ * @param {String} userId The student's user UUID
+ */
+async function seedStudent(userId) {
+  const createdStudent = createStudent(userId);
+  await Student.create(createdStudent);
+
+  return createdStudent;
+}
 
 /**
  * @description

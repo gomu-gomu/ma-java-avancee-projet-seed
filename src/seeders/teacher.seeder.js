@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker/locale/ar';
 
-import { createUser } from './user.seeder.js';
-import { User } from './../models/user.model.js';
+import { seedUser } from './user.seeder.js';
 import { Teacher } from './../models/teacher.model.js';
 import { UserType } from './../enums/user-type.enum.js';
 import { TeacherCycle } from './../models/teacherCycles.model.js';
@@ -19,10 +18,9 @@ export async function seedTeachers(subjects, cycles) {
   const teachers = [];
 
   for (const subject of Object.values(subjects)) {
-    const teacherUser = createUser(UserType.Teacher);
-    await User.create(teacherUser);
-
+    const teacherUser = await seedUser(UserType.Teacher);
     const teacher = await seedTeacher(teacherUser.id, subject.id);
+
     teachers.push(teacher);
 
     for (const cycle of cycles) {

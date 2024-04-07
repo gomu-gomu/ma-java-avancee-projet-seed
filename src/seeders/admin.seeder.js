@@ -1,6 +1,6 @@
 import { User } from '../models/user.model.js';
+import { seedUser } from '../seeders/user.seeder.js';
 import { UserType } from '../enums/user-type.enum.js';
-import { createUser } from '../seeders/user.seeder.js';
 
 
 
@@ -14,9 +14,7 @@ export async function seedAdmins() {
   const admins = [];
 
   for (let _ of new Array(MAX_ADMINS).fill(0)) {
-    const adminUser = createUser(UserType.Admin);
-    await User.create(adminUser);
-
+    const adminUser = await seedUser(UserType.Admin);
     admins.push(adminUser);
   }
 
