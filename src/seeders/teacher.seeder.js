@@ -1,4 +1,5 @@
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/ar';
+
 import { createUser } from './user.seeder.js';
 import { User } from './../models/user.model.js';
 import { Teacher } from './../models/teacher.model.js';
@@ -50,9 +51,9 @@ function createTeacher(userId, subjectId) {
     userId,
     subjectId,
     id: faker.string.uuid(),
-    phone: faker.phone.number(),
     lastName: faker.person.lastName(),
     firstName: faker.person.firstName(),
+    phone: faker.phone.number('06 ## ## ## ##'),
     cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${100000 + faker.number.int(100000)}`
   };
 }

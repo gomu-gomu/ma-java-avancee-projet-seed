@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/ar';
 
 import { UserType } from '../enums/user-type.enum.js';
 
@@ -6,9 +6,9 @@ import { User } from '../models/user.model.js';
 import { Student } from '../models/student.model.js';
 import { Parenthood } from '../models/parenthood.model.js';
 
+import { Parent } from '../models/parent.model.js';
 import { createStudent } from './student.seeder.js';
 import { createUser } from '../seeders/user.seeder.js';
-import { Parent } from '../models/parent.model.js';
 
 
 
@@ -43,9 +43,9 @@ function createParent(userId) {
   return {
     userId,
     id: faker.string.uuid(),
-    phone: faker.phone.number(),
     lastName: faker.person.lastName(),
     firstName: faker.person.firstName(),
+    phone: faker.phone.number('06 ## ## ## ##'),
     cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${100000 + faker.number.int(100000)}`
   };
 }
