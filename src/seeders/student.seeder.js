@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker/locale/ar';
 import { seedUser } from './user.seeder.js';
 import { Student } from '../models/student.model.js';
 import { UserType } from '../enums/user-type.enum.js';
+import { StudentCycle } from '../models/studentCycles.model.js';
 
 
 const MIN_STUDENT_PER_CLASS = 10;
@@ -16,7 +17,7 @@ const MAX_STUDENT_PER_CLASS = 15;
 export async function seedStudents(cycles) {
   const students = [];
 
-  for (const _ of cycles) {
+  for (const cycle of cycles) {
     const gen = { min: MIN_STUDENT_PER_CLASS, max: MAX_STUDENT_PER_CLASS };
     const studentsPerClass = faker.number.int(gen);
     const range = new Array(studentsPerClass).fill(0);
@@ -24,6 +25,7 @@ export async function seedStudents(cycles) {
     for (const _ of range) {
       const studentUser = await seedUser(UserType.Student);
       const student = await seedStudent(studentUser.id);
+      await seedStudentCycle(student.id, cycle.id);
 
       students.push(student);
     }
@@ -47,6 +49,18 @@ async function seedStudent(userId) {
 
 /**
  * @description
+ * Seeds a fake student cycle association
+ *
+ * @param {String} studentId The student's UUID
+ * @param {String} cycleId The cycle's UUID associated with the student
+ */
+async function seedStudentCycle(studentId, cycleId) {
+  const createdStudentCycle = createStudentCycle(studentId, cycleId);
+  await StudentCycle.create(createdStudentCycle);
+}
+
+/**
+ * @description
  * Creates a fake student
  *
  * @param {String} userId The student's user UUID
@@ -60,5 +74,19 @@ export function createStudent(userId) {
     phone: faker.phone.number('06 ## ## ## ##'),
     cne: `${faker.string.alpha(1).toUpperCase()}${100000000 + faker.number.int(100000000)}`,
     cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${1000000 + faker.number.int(1000000)}`
+  };
+}
+
+/**
+ * @description
+ * Creates a fake student cycle association
+ *
+ * @param {String} studentId The student's UUID
+ * @param {String} cycleId The cycle's UUID associated with the student
+ */
+function createStudentCycle(studentId, cycleId) {
+  return {
+    cycleId,
+    studentId
   };
 }
