@@ -20,10 +20,14 @@ export async function seedGrades(sectors) {
   // Tronc Commun
   grades.highFirstScience = await seedGrade(sectors.scienceSector.id, 'Tronc Commun', 10);
   grades.highFirstTechnology = await seedGrade(sectors.technologySector.id, 'Tronc Commun', 10);
+  grades.highEnseignementOriginel = await seedGrade(sectors.enseignementOriginelSector.id, 'Tronc Commun', 10);
   grades.highFirstLetterAndHumanitary = await seedGrade(sectors.letterAndHumanitarySector.id, 'Tronc Commun', 10);
 
   // 1ére Bac
+
   grades.highSecondMath = await seedGrade(sectors.mathsector.id, '1ère Bac', 11);
+  grades.highSecondArabe = await seedGrade(sectors.arabeSector.id, '1ère Bac', 11);
+  grades.highSecondChariaa = await seedGrade(sectors.chariaaSector.id, '1ère Bac', 11);
   grades.highSecondExperimental = await seedGrade(sectors.experimentalSector.id, '1ère Bac', 11);
   grades.highSecondEconomical = await seedGrade(sectors.economicalGestionSector.id, '1ère Bac', 11);
   grades.highSecondElectricTechnology = await seedGrade(sectors.electricTechnologySector.id, '1ère Bac', 11);
@@ -35,6 +39,8 @@ export async function seedGrades(sectors) {
   grades.highThirdSVT = await seedGrade(sectors.svtSector.id, '2ème Bac', 12);
   grades.highThirdMathA = await seedGrade(sectors.mathASector.id, '2ème Bac', 12);
   grades.highThirdMathB = await seedGrade(sectors.mathBSector.id, '2ème Bac', 12);
+  grades.highThirdArabe = await seedGrade(sectors.arabeSector.id, '2ème Bac', 12);
+  grades.highThirdChariaa = await seedGrade(sectors.chariaaSector.id, '2ème Bac', 12);
   grades.highThirdLetters = await seedGrade(sectors.lettersSector.id, '2ème Bac', 12);
   grades.highThirdPhysics = await seedGrade(sectors.physicsSector.id, '2ème Bac', 12);
   grades.highThirdEconomical = await seedGrade(sectors.economicalSector.id, '2ème Bac', 12);

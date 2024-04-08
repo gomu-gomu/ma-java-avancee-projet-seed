@@ -14,16 +14,21 @@ export async function seedSubjects(grades) {
   const subjects = {};
 
   subjects.lawSubject = await seedSubject('Droit');
-  subjects.arabicSubject = await seedSubject('Arabe');
-  subjects.englishSubject = await seedSubject('Anglais');
+  subjects.tawtikSubject = await seedSubject('التوثيق');
+  subjects.englishSubject = await seedSubject('English');
+  subjects.lettresSubject = await seedSubject('Lettres');
   subjects.frenchSubject = await seedSubject('Français');
   subjects.mathSubject = await seedSubject('Mathématiques');
+  subjects.arabicSubject = await seedSubject('اللغة العربية');
   subjects.philosophySubject = await seedSubject('Philosophie');
   subjects.informatiqueSubject = await seedSubject('Informatique');
+  subjects.fiqhAndOssoulSubject = await seedSubject('أصول الفقه');
+  subjects.faraidAndTawkitSubject = await seedSubject('الفرائض والتوقيت');
+  subjects.tafssirAndHadithSubject = await seedSubject('التفسير و الحديث');
+  subjects.educationIslamiqueSubject = await seedSubject('التربية الإسلامية');
   subjects.engineeringSubject = await seedSubject('Sciences de l\'ingénieur');
   subjects.physicsAndChimiqueSubject = await seedSubject('Physique et Chimie');
   subjects.geographicHistorySubject = await seedSubject('Histoire Géographie');
-  subjects.educationIslamiqueSubject = await seedSubject('Education Islamique');
   subjects.industrialtechnology = await seedSubject('Technologie Industrielle');
   subjects.svaSubject = await seedSubject('Sciences Végétales et Animales (SVA)');
   subjects.svtSubject = await seedSubject('Sciences de la Vie et de la Terre (SVT)');
@@ -101,6 +106,18 @@ export async function seedSubjects(grades) {
   await seedGradeSubject(grades.highFirstLetterAndHumanitary.id, subjects.philosophySubject.id, 2);
   await seedGradeSubject(grades.highFirstLetterAndHumanitary.id, subjects.geographicHistorySubject.id, 4);
   await seedGradeSubject(grades.highFirstLetterAndHumanitary.id, subjects.educationIslamiqueSubject.id, 2);
+  
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.svtSubject.id, 2);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.mathSubject.id, 2);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.arabicSubject.id, 4);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.tawtikSubject.id, 2);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.frenchSubject.id, 3);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.englishSubject.id, 2);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.philosophySubject.id, 2);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.informatiqueSubject.id, 2);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.fiqhAndOssoulSubject.id, 4);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.tafssirAndHadithSubject.id, 4);
+  await seedGradeSubject(grades.highEnseignementOriginel.id, subjects.geographicHistorySubject.id, 3);
   // #endregion
 
   // #region 1ére Bac
@@ -163,6 +180,30 @@ export async function seedSubjects(grades) {
   await seedGradeSubject(grades.highSecondLetterAndHumanitary.id, subjects.philosophySubject.id, 4);
   await seedGradeSubject(grades.highSecondLetterAndHumanitary.id, subjects.geographicHistorySubject.id, 4);
   await seedGradeSubject(grades.highSecondLetterAndHumanitary.id, subjects.educationIslamiqueSubject.id, 2);
+
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.svtSubject.id, 1);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.mathSubject.id, 1);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.tawtikSubject.id, 1);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.frenchSubject.id, 3);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.arabicSubject.id, 2);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.englishSubject.id, 2);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.lettresSubject.id, 4);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.philosophySubject.id, 2);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.fiqhAndOssoulSubject.id, 5);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.faraidAndTawkitSubject.id, 2);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.tafssirAndHadithSubject.id, 4);
+  await seedGradeSubject(grades.highSecondChariaa.id, subjects.geographicHistorySubject.id, 2);
+  
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.svtSubject.id, 1);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.mathSubject.id, 1);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.tawtikSubject.id, 1);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.frenchSubject.id, 3);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.arabicSubject.id, 4);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.englishSubject.id, 2);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.lettresSubject.id, 5);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.philosophySubject.id, 2);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.tafssirAndHadithSubject.id, 4);
+  await seedGradeSubject(grades.highSecondArabe.id, subjects.geographicHistorySubject.id, 3);
   // #endregion
 
   // #region 2ére Bac
@@ -272,6 +313,28 @@ export async function seedSubjects(grades) {
   await seedGradeSubject(grades.highThirdHumanitary.id, subjects.philosophySubject.id, 4);
   await seedGradeSubject(grades.highThirdHumanitary.id, subjects.geographicHistorySubject.id, 4);
   await seedGradeSubject(grades.highThirdHumanitary.id, subjects.educationIslamiqueSubject.id, 2);
+
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.mathSubject.id, 1);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.tawtikSubject.id, 4);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.frenchSubject.id, 3);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.arabicSubject.id, 2);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.englishSubject.id, 2);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.lettresSubject.id, 4);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.philosophySubject.id, 2);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.fiqhAndOssoulSubject.id, 5);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.faraidAndTawkitSubject.id, 2);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.tafssirAndHadithSubject.id, 4);
+  await seedGradeSubject(grades.highThirdChariaa.id, subjects.geographicHistorySubject.id, 2);
+  
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.mathSubject.id, 1);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.tawtikSubject.id, 4);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.frenchSubject.id, 3);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.arabicSubject.id, 4);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.englishSubject.id, 2);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.lettresSubject.id, 5);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.philosophySubject.id, 2);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.tafssirAndHadithSubject.id, 4);
+  await seedGradeSubject(grades.highThirdArabe.id, subjects.geographicHistorySubject.id, 3);
   // #endregion
 
   return subjects;

@@ -16,9 +16,12 @@ export async function seedSectors() {
   // Tronc Commun
   sectors.scienceSector = await seedSector('Sciences');
   sectors.technologySector = await seedSector('Technologies');
+  sectors.enseignementOriginelSector = await seedSector('Enseignement Originel');
   sectors.letterAndHumanitarySector = await seedSector('Lettres et Sciences Humaines');
-
+  
   // 1ére Bac
+  sectors.arabeSector = await seedSector('Langue Arabe');
+  sectors.chariaaSector = await seedSector('Sciences Chariaa');
   sectors.mathsector = await seedSector('Sciences Mathématiques');
   sectors.experimentalSector = await seedSector('Sciences Expérimentales');
   sectors.economicalGestionSector = await seedSector('Sciences Économiques et Gestion');
