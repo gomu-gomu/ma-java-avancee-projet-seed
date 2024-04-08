@@ -16,7 +16,7 @@ export async function seedParents(students) {
 
   for (const student of students) {
     const parentUser = await seedUser(UserType.Parent);
-    const parent = await seedParent(parentUser.id);
+    const parent = await seedParent(parentUser.id, student.lastName);
 
     await seedParenthood(parent.id, student.id);
     parents.push(parent);
@@ -30,9 +30,10 @@ export async function seedParents(students) {
  * Seeds a fake parent
  *
  * @param {String} userId The parent's user UUID
+ * @param {String} lastName The parent's last name
  */
-async function seedParent(userId) {
-  const createdParent = createParent(userId);
+async function seedParent(userId, lastName) {
+  const createdParent = createParent(userId, lastName);
   await Parent.create(createdParent);
 
   return createdParent;
@@ -57,12 +58,13 @@ async function seedParenthood(parentId, studentId) {
  * Creates a fake parent
  *
  * @param {String} userId The parent's user UUID
+ * @param {String} lastName The parent's last name
  */
-function createParent(userId) {
+function createParent(userId, lastName) {
   return {
     userId,
+    lastName,
     id: faker.string.uuid(),
-    lastName: faker.person.lastName(),
     firstName: faker.person.firstName(),
     phone: faker.phone.number('06 ## ## ## ##'),
     cin: `${faker.string.alpha(Math.floor(Math.random() * 2) + 1).toUpperCase()}${1000000 + faker.number.int(1000000)}`
