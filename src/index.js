@@ -1,12 +1,14 @@
+import { seedExams } from './seeders/exam.seeder.js';
 import { seedAdmins } from './seeders/admin.seeder.js';
-import { seedClasses } from './seeders/class.seeder.js';
 import { seedCycles } from './seeders/cycle.seeder.js';
 import { seedGrades } from './seeders/grade.seeder.js';
+import { seedClasses } from './seeders/class.seeder.js';
 import { seedSectors } from './seeders/sector.seeder.js';
 import { seedParents } from './seeders/parent.seeder.js';
 import { seedStudents } from './seeders/student.seeder.js';
 import { seedSubjects } from './seeders/subject.seeder.js';
 import { seedTeachers } from './seeders/teacher.seeder.js';
+import { faker } from '@faker-js/faker';
 
 
 
@@ -18,6 +20,7 @@ async function main() {
   const subjects = await seedSubjects(grades);
   const classes = await seedClasses(grades);
   const cycles = await seedCycles(classes);
+  const exams = await seedExams(cycles, subjects);
 
   const admins = await seedAdmins();
   const students = await seedStudents(cycles);
@@ -27,6 +30,7 @@ async function main() {
   console.info('\n✅ Databased seeded!\n');
 
   console.table({
+    exams: exams.length,
     cycles: cycles.length,
     admins: admins.length,
     classes: classes.length,

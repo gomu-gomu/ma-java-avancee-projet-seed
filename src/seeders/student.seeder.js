@@ -12,7 +12,7 @@ const MAX_STUDENT_PER_CLASS = 15;
 /**
  * Seeds fake students
  *
- * @param {Array<Object>} cycles The cycle's to be associated with the fake students
+ * @param {Array<Object>} cycles The cycles to be associated with the fake students
  */
 export async function seedStudents(cycles) {
   const students = [];
@@ -65,7 +65,7 @@ async function seedStudentCycle(studentId, cycleId) {
  *
  * @param {String} userId The student's user UUID
  */
-export function createStudent(userId) {
+function createStudent(userId) {
   return {
     userId,
     id: faker.string.uuid(),
