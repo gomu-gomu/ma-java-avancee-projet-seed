@@ -8,7 +8,6 @@ import { seedParents } from './seeders/parent.seeder.js';
 import { seedStudents } from './seeders/student.seeder.js';
 import { seedSubjects } from './seeders/subject.seeder.js';
 import { seedTeachers } from './seeders/teacher.seeder.js';
-import { faker } from '@faker-js/faker';
 
 
 
@@ -23,7 +22,7 @@ async function main() {
   const exams = await seedExams(cycles, subjects);
 
   const admins = await seedAdmins();
-  const students = await seedStudents(cycles);
+  const students = await seedStudents(cycles, exams);
   const teachers = await seedTeachers(subjects, cycles);
   const parents = await seedParents(students);
 

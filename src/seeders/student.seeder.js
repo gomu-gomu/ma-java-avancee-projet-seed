@@ -3,7 +3,9 @@ import { faker } from '@faker-js/faker/locale/ar';
 import { seedUser } from './user.seeder.js';
 import { Student } from '../models/student.model.js';
 import { UserType } from '../enums/user-type.enum.js';
+import { StudentExam } from '../models/studentExams.model.js';
 import { StudentCycle } from '../models/studentCycles.model.js';
+
 
 
 const MIN_STUDENT_PER_CLASS = 10;
@@ -13,8 +15,9 @@ const MAX_STUDENT_PER_CLASS = 15;
  * Seeds fake students
  *
  * @param {Array<Object>} cycles The cycles to be associated with the fake students
+ * @param {Array<Object>} exams The exams to be associated with the fake students
  */
-export async function seedStudents(cycles) {
+export async function seedStudents(cycles, exams) {
   const students = [];
 
   for (const cycle of cycles) {
@@ -26,6 +29,10 @@ export async function seedStudents(cycles) {
       const studentUser = await seedUser(UserType.Student);
       const student = await seedStudent(studentUser.id);
       await seedStudentCycle(student.id, cycle.id);
+
+      for (const exam of exams.filter(e => e.cycleId === cycle.id)) {
+        await seedStudentExam(student.id, exam.id);
+      }
 
       students.push(student);
     }
@@ -61,6 +68,18 @@ async function seedStudentCycle(studentId, cycleId) {
 
 /**
  * @description
+ * Seeds a fake student exam association
+ *
+ * @param {String} studentId The student's UUID
+ * @param {String} examId The exam's UUID
+ */
+async function seedStudentExam(studentId, examId) {
+  const createdStudentExam = createStudentExam(studentId, examId);
+  await StudentExam.create(createdStudentExam);
+}
+
+/**
+ * @description
  * Creates a fake student
  *
  * @param {String} userId The student's user UUID
@@ -87,6 +106,24 @@ function createStudent(userId) {
 function createStudentCycle(studentId, cycleId) {
   return {
     cycleId,
+    studentId
+  };
+}
+
+/**
+ * @description
+ * Creates a fake student exam association
+ *
+ * @param {String} studentId The student's UUID
+ * @param {String} examId The exam's UUID
+ */
+function createStudentExam(studentId, examId) {
+  const gen = { min: 0, max: 20 };
+  const score = faker.number.int(gen);
+
+  return {
+    score,
+    examId,
     studentId
   };
 }

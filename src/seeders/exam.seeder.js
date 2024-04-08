@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/ar';
+import { faker } from '@faker-js/faker';
 import { Exam } from '../models/exam.model.js';
 
 
@@ -41,6 +41,8 @@ export async function seedExams(cycles, subjects) {
 async function seedExam(cycleId, subjectId, num) {
   const createdExam = createExam(cycleId, subjectId, num);
   await Exam.create(createdExam);
+
+  return createdExam;
 }
 
 /**
