@@ -1,6 +1,5 @@
-import { User } from '../models/user.model.js';
-import { seedUser } from '../seeders/user.seeder.js';
 import { UserType } from '../enums/user-type.enum.js';
+import { seedStaticUser, seedUser } from '../seeders/user.seeder.js';
 
 
 
@@ -17,6 +16,10 @@ export async function seedAdmins() {
     const adminUser = await seedUser(UserType.Admin);
     admins.push(adminUser);
   }
+
+  const user = { email: "admin@harvard.edu", password: "123", type: UserType.Admin };
+  const admin = await seedStaticUser(user);
+  admins.push(admin);
 
   return admins;
 }
