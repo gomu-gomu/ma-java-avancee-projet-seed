@@ -1,9 +1,10 @@
+import config from '../config.json' with { type: "json" };
+
 import { UserType } from '../enums/user-type.enum.js';
 import { seedStaticUser, seedUser } from '../seeders/user.seeder.js';
 
 
 
-const MAX_ADMINS = 4;
 
 /**
  * @description
@@ -12,7 +13,7 @@ const MAX_ADMINS = 4;
 export async function seedAdmins() {
   const admins = [];
 
-  for (let _ of new Array(MAX_ADMINS).fill(0)) {
+  for (let _ of new Array(config.MAX_ADMINS).fill(0)) {
     const adminUser = await seedUser(UserType.Admin);
     admins.push(adminUser);
   }

@@ -1,9 +1,9 @@
+import config from '../config.json' with { type: "json" };
+
 import { faker } from '@faker-js/faker';
 import { Exam } from '../models/exam.model.js';
 
 
-const MIN_EXAMS_PER_SUBJECT = 1;
-const MAX_EXAMS_PER_SUBJECT = 2;
 
 /**
  * Seeds fake exams
@@ -16,7 +16,7 @@ export async function seedExams(cycles, subjects) {
 
   for (const cycle of cycles) {
     for (const subject of Object.values(subjects)) {
-      const gen = { min: MIN_EXAMS_PER_SUBJECT, max: MAX_EXAMS_PER_SUBJECT };
+      const gen = { min: config.MIN_EXAMS_PER_SUBJECT, max: config.MAX_EXAMS_PER_SUBJECT };
       const examsPerSubject = faker.number.int(gen);
       const range = new Array(examsPerSubject).fill(0).map((_, index) => index + 1);
 

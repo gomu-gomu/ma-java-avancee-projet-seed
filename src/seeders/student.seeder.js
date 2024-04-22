@@ -1,3 +1,5 @@
+import config from '../config.json' with { type: "json" };
+
 import { faker } from '@faker-js/faker/locale/ar';
 
 import { seedUser } from './user.seeder.js';
@@ -7,9 +9,6 @@ import { StudentExam } from '../models/studentExams.model.js';
 import { StudentCycle } from '../models/studentCycles.model.js';
 
 
-
-const MIN_STUDENT_PER_CLASS = 10;
-const MAX_STUDENT_PER_CLASS = 15;
 
 /**
  * Seeds fake students
@@ -21,7 +20,7 @@ export async function seedStudents(cycles, exams) {
   const students = [];
 
   for (const cycle of cycles) {
-    const gen = { min: MIN_STUDENT_PER_CLASS, max: MAX_STUDENT_PER_CLASS };
+    const gen = { min: config.MIN_STUDENT_PER_CLASS, max: config.MAX_STUDENT_PER_CLASS };
     const studentsPerClass = faker.number.int(gen);
     const range = new Array(studentsPerClass).fill(0);
 

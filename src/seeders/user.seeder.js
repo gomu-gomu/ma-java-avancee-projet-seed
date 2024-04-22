@@ -1,3 +1,5 @@
+import config from '../config.json' with { type: "json" };
+
 import { faker } from '@faker-js/faker';
 
 import { User } from '../models/user.model.js';
@@ -47,6 +49,6 @@ function createUser(type) {
     type,
     id: faker.string.uuid(),
     email: faker.internet.email(),
-    password: hashPassword(faker.internet.password())
+    password: hashPassword(config.DEFAULT_PASSWORD)
   };
 }

@@ -1,10 +1,9 @@
+import config from '../config.json' with { type: "json" };
+
 import { faker } from '@faker-js/faker';
 import { Cycle } from '../models/cycle.model.js';
 
 
-
-const MAX_YEARS = 2;
-const START_YEAR = 2020;
 
 /**
  * @description
@@ -14,9 +13,9 @@ const START_YEAR = 2020;
  */
 export async function seedCycles(classes) {
   const cycles = [];
-  const endYear = START_YEAR + MAX_YEARS;
+  const endYear = config.START_YEAR + config.MAX_YEARS;
 
-  let year = START_YEAR;
+  let year = config.START_YEAR;
   while (year < endYear) {
     for (const _class of Object.values(classes)) {
       const cycle = await seedCycle(_class.id, year);
