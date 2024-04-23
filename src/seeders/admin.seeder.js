@@ -18,7 +18,7 @@ export async function seedAdmins() {
     admins.push(adminUser);
   }
 
-  const user = { email: "admin@harvard.edu", password: "123", type: UserType.Admin };
+  const user = { email: "admin@harvard.edu", password: config.DEFAULT_PASSWORD, type: UserType.Admin };
   const admin = await seedStaticUser(user);
   admins.push(admin);
 
