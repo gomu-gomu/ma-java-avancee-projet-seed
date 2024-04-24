@@ -8,7 +8,7 @@ import { Student } from './student.model.js';
 const StudentExam = db.define('studentExam', {
   score: {
     allowNull: true,
-    type: DataTypes.SMALLINT
+    type: DataTypes.FLOAT
   },
   studentId: {
     primaryKey: true,
