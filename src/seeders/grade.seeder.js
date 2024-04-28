@@ -24,7 +24,6 @@ export async function seedGrades(sectors) {
   grades.highFirstLetterAndHumanitary = await seedGrade(sectors.letterAndHumanitarySector.id, 'Tronc Commun', 10);
 
   // 1ére Bac
-
   grades.highSecondMath = await seedGrade(sectors.mathsector.id, '1ère Bac', 11);
   grades.highSecondArabe = await seedGrade(sectors.arabeSector.id, '1ère Bac', 11);
   grades.highSecondChariaa = await seedGrade(sectors.chariaaSector.id, '1ère Bac', 11);

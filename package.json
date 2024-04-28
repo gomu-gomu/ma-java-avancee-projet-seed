@@ -19,5 +19,6 @@
     "dotenv": "^16.4.5",
     "pg": "^8.11.5",
     "sequelize": "^6.37.2"
-  }
+  },
+  "packageManager": "pnpm@9.0.6+sha1.648f6014eb363abb36618f2ba59282a9eeb3e879"
 }

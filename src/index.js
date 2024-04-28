@@ -22,7 +22,7 @@ async function main() {
   const exams = await seedExams(cycles, subjects);
 
   const admins = await seedAdmins();
-  const students = await seedStudents(cycles, exams);
+  const students = await seedStudents(cycles, exams, classes, grades);
   const teachers = await seedTeachers(subjects, cycles);
   const parents = await seedParents(students);
 

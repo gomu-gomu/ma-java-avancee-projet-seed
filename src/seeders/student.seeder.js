@@ -6,6 +6,7 @@ import { seedUser } from './user.seeder.js';
 import { Student } from '../models/student.model.js';
 import { UserType } from '../enums/user-type.enum.js';
 import { StudentExam } from '../models/studentExams.model.js';
+import { GradeSubject } from '../models/gradeSubject.model.js';
 import { StudentCycle } from '../models/studentCycles.model.js';
 
 
@@ -15,8 +16,10 @@ import { StudentCycle } from '../models/studentCycles.model.js';
  *
  * @param {Array<Object>} cycles The cycles to be associated with the fake students
  * @param {Array<Object>} exams The exams to be associated with the fake students
+ * @param {Array<Object>} classes The classes to be associated with the fake students
+ * @param {Array<Object>} grades The grades to be associated with the fake students
  */
-export async function seedStudents(cycles, exams) {
+export async function seedStudents(cycles, exams, classes, grades) {
   const students = [];
 
   for (const cycle of cycles) {
@@ -30,7 +33,9 @@ export async function seedStudents(cycles, exams) {
       await seedStudentCycle(student.id, cycle.id);
 
       for (const exam of exams.filter(e => e.cycleId === cycle.id)) {
-        await seedStudentExam(student.id, exam.id);
+        if (await studiesSubject(exam.subjectId, cycle.classId, classes, grades)) {
+          await seedStudentExam(student.id, exam.id);
+        }
       }
 
       students.push(student);
@@ -125,4 +130,12 @@ function createStudentExam(studentId, examId) {
     examId,
     studentId
   };
+}
+
+async function studiesSubject(subjectId, classId, classes, grades) {
+  const class_ = classes.find(e => e.id === classId);
+  const grade = Object.values(grades).find(e => e.id === class_.gradeId);
+  const gradeSubject = await GradeSubject.findAll({ where: { gradeId: grade.id, subjectId } });
+
+  return Boolean(gradeSubject.flatMap(e => e.dataValues).find(e => e.subjectId === subjectId && e.gradeId === grade.id));
 }
